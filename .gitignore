@@ -2,3 +2,4 @@
 *.xlsx
 test.py
 *.log
+*.env

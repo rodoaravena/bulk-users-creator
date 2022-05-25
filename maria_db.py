@@ -4,11 +4,11 @@ import pandas as pd
 def connect():
 	try:
 		conn = mysql.connect(
-				user = 'rodoaravena',
-				password = 'Rodolfo1727.,.',
-				host = '10.70.0.112',
+				user = '<your_mysql|maridb_user_here>',
+				password = '<your_mysql|maridb_password_here>',
+				host = '<your_mysql|maridb_host_here>',
 				port = 3306,
-				database = 'prueba',
+				database = '<your_mysql|maridb_database_here>',
 				)
 	except mysql.Error as e:
 		print(f"Error connecting to MySQL: {e}")
@@ -42,7 +42,7 @@ def create_users(df, cur):
 		print(f"{row.usuario} --> {row.pswd}")
 	cur.close()
 	
-df = pd.read_csv("usuarios.csv")
+df = pd.read_csv("<your_csv_file_here>")
 con = connect()
 create_users(df, con)
 
