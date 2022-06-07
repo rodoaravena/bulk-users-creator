@@ -3,3 +3,5 @@
 test.py
 *.log
 *.env
+__pycache__/
+*.pyc

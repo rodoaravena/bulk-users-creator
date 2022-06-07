@@ -2,7 +2,7 @@ import gitlab
 import pandas as pd
 
 
-def auth_gitlab(uri, token):
+def auth_gitlab():
     gl = None
     try:
         gl = gitlab.Gitlab(url=uri, private_token=token)
@@ -10,11 +10,12 @@ def auth_gitlab(uri, token):
         
     except gitlab.GitlabAuthenticationError as e:
         print(f"Error connecting to gitlab: {e}")
-        gl = None
+        return None
     
     return gl
 
-def bulk_users_creation(data, gl=None):
+def bulk_users_creation(data):
+    gl = auth_gitlab()
     if gl is not None:
         for idx, row in data.iterrows():
             user = gl.users.create({
@@ -22,6 +23,21 @@ def bulk_users_creation(data, gl=None):
                         'password': row.pswd,
                         'username': row.usuario,
                         'name': row.NOMBRE})
+
+def bulk_users_creation(data):
+    gl = auth_gitlab()
+    if gl is not None:
+        for idx, row in data.iterrows():
+            user = gl.users.create({
+                        'email': row.CORREO,
+                        'password': row.pswd,
+                        'username': row.usuario,
+                        'name': row.NOMBRE})
+
+def bulk_add_member_to_project():
+    pass
+    # member = project.members.create({'user_id': user.id, 'access_level':
+    #                             gitlab.const.DEVELOPER_ACCESS})
         
 
 gl_obj = auth_gitlab('<your_gilab_url_here>','<your_gilab_token_here>')
