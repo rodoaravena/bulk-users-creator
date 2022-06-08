@@ -24,6 +24,11 @@ def create_project():
         user_project = user.projects.create({'name': 'project'})
         user_projects = user.projects.list()
 
+def bulk_add_member_to_group():
+    gl = auth_gitlab()
+    if gl is not None:
+        group = gl.groups.create({'name': 'group1', 'path': 'group1'})
+
 def bulk_users_creation(data):
     gl = auth_gitlab()
     if gl is not None:
@@ -35,17 +40,5 @@ def bulk_users_creation(data):
                         'name': row.NOMBRE})
             user.activate()
 
-def bulk_add_member_to_project():
-    # TODO: Asignar proyecto
-    pass
-    
 
-
-
-gl_obj = auth_gitlab()
-
-# data = pd.read_csv('<your_csv_file_here>')
-
-# bulk_users_creation(data, gl_obj)
-
-
+bulk_add_member_to_group()
