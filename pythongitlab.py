@@ -1,7 +1,11 @@
 import gitlab
 import pandas as pd
 
-
+def create_project():
+    user = gl_obj.users.list(username='rodolfo.aravena')[0]
+    user_project = user.projects.create({'name': 'project'})
+    user_projects = user.projects.list()
+    
 def auth_gitlab():
     gl = None
     try:
